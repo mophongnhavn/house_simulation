@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+    <script>
+        function changeImg()
+        {
+            var img=document.getElementById("results");
+            var dir=document.getElementById("d_h").value;
+            if (dir==1){
+                img.src="{% static 'images/4.jpg' %}"
+            }else{
+                if (dir==2){
+                    img.src="{% static 'images/1.jpg' %}"
+                }else{
+                    img.src="{% static 'images/3.jpg' %}"
+                }
+            }
+            return false;
+        }
+    </script>
+</head>
+
+<style>
+    table, tr {
+        border-bottom: 1px;
+        border-color: #0b2e13;
+        vertical-align: central;
+    }
+    .top_menu {
+        background-color: darkblue;
+        padding: 0;
+    }
+    .Univ {
+        background-color: lightblue;
+        padding: 0;
+        border-bottom: 1px;
+    }
+</style>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <table bgcolor="#add8e6" style="width:100%">
+                <tr>
+                    <td style="width: 10%">
+                        <p align="right">
+                            <img src="{% static 'images/logo.png' %}" style="max-height: 200px">
+                        </p>
+                    </td>
+                    <td>
+                        <h1><b>MÔ PHỎNG NHÀ VN</b></h1>
+                        <H6><b>TRƯỜNG ĐẠI HỌC KỸ THUẬT CÔNG NGHIỆP</b></H6>
+                        <h6>KHOA XÂY DỰNG VÀ MÔI TRƯỜNG</h6>
+                    </td>
+                </tr>
+                <tr bgcolor="#00008b">
+                    <td>
+                        <h6 style="color: white">MÔ ĐUN THÔNG GIÓ</h6>
+                    </td>
+                    <td>
+
+                        <p align="right" style="color: white"><b>Trang chủ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Liên hệ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="bs-sliderbar">
+                    <ul class="nav flex-column">
+                        <li><a href="/">Thông tin dự án</a> </li>
+                        <li><a href="/">Các mô đun</a> </li>
+                        <li><a href="/">Liên hệ</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="container-fluid">
+                    {% block content %}
+
+                    {% endblock %}
+                    <form method="POST" style="border: black">
+                        <h7>MỜI NHẬP THÔNG TIN NHÀ CỦA BẠN:</h7>
+                        <br>
+                        {% csrf_token %}
+                        Chiều rộng (m):
+                        <input type="number" name="w_h" value="1">
+                        Chiều dài (m):
+                        <input type="number" name="l_h" value="1">
+                        Hướng:
+                        <input type="number" name="d_h">
+                        Số cửa:
+                        <input type="number" name="d_h">
+                        <input type="submit" value="Save!">
+                    </form>
+                    <br>
+                </div>
+                <center>
+                    <h5><b>KẾT QUẢ MÔ PHỎNG:</b></h5>
+                    {%  autoescape off %}
+                    {{ graphic|safe }}
+                    {% endautoescape %}
+                </center>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
